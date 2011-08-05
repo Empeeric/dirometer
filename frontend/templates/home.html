@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+{%  block extra-css %}
+<style type="text/css">
+    #map{
+        width:600px;
+        height:450px;
+        padding-bottom:50px;
+        padding-top:20px;
+    }
+    
+    .good{
+        background-color: #009933;
+        border:black;
+        border-style:solid;
+    }
+
+    .bad{
+        background-color: #cc3300;
+        border:black;
+         border-style:solid;
+    }
+    span
+    {
+        padding-left:20px;
+    }
+
+    #action_bar{
+        padding-bottom:30px;
+    }
+    .pointer{
+        cursor:pointer
+    }
+</style>
+{% endblock %}
+{% block content %}
+    <div id='info'>
+        <h1>בעל הבית השתגע?</h1>
+    <p>
+        בעל הבית שלכם מנסה להעלות לכם את שכר הדירה ולהעמידכם מול הברירה לשלם יותר או לעבור לרחוב?
+<br>
+        הוסיפו את כתובת הדירה ואת השינוי בשכר הדירה לאתר זה.
+<br>
+        מחפשים דירה?
+<br>
+        הפגינו סולידריות חברתית, ולפני שאתם הולכים לראות דירה, בדקו האם היא מופיעה באתר. אם בעל הבית אכן העלה
+<br>
+        את שכר הדירה משנה שעברה, אל תלכו לראות את הדירה! הוא יעשה לכם את אותו הדבר שנה הבאה.
+<br>
+        לחצו לייק כדי להודיע שגם אתם לא שוכרים דירה מבעל בית שהעלה את שכר הדירה!
+    </p>
+    <iframe src="http://www.facebook.com/plugins/like.php?app_id=239648889391600&amp;href=dirometer.empeeric.com&amp;send=false&amp;layout=standard&amp;width=320&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:320px; height:80px;" allowTransparency="true"></iframe>
+    </div>
+    <div id="action_bar">
+    <span>
+        <img src='img/up.png'>
+        <a href="javascript:showDialog('rent_up_dialog')" >דווח על עליה בשכ"ד</a>
+    </span>
+      <span>
+        <img src='img/down.png'>
+        <a href="javascript:showDialog('rent_down_dialog')">דווח על ירידה בשכ"ד</a>
+      </span>
+        <span>
+        <img src='img/check.png'>
+        <a href="javascript:showDialog('check_dialog')">בדוק עליה/ירידה בשכ"ד</a>
+         </span>
+    </div>
+    <div id='map_view'>
+        <div id='map'> </div>
+    </div>
+
+    <div id='rent_up_dialog'>
+        <img src="img/close.png" class="pointer" style="position: relative; left: -408px;z-index:100;"  onclick="closeAll()"/>
+        <table style="width:450">
+            <thead> <img src="img/rent_up.png" style="position: relative; bottom: 34px;"/> </thead>
+            <tr>
+                <td>
+                    עיר
+                </td>
+                <td>
+                    <input type="text" id="up_city_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+רחוב
+                </td>
+                <td>
+                    <input type="text" id="up_street_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+מספר בית:
+                </td>
+                <td>
+                    <input type="text" id="up_house_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+מספר דירה:
+                </td>
+                <td>
+                    <input type="text" id="up_apr_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+שכ"ד ישן:
+                </td>
+                <td>
+                    <input type="text" id="up_old_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+שכ"ד חדש:
+                </td>
+                <td>
+                    <input type="text" id="up_new_in">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <img src="img/submit_button.png" class="pointer" onclick="submit_new_rent()"/>
+    </div>
+
+     <div id='rent_down_dialog'>
+        <img src="img/close.png" class="pointer" style="position: relative; left: -408px;z-index:100;"  onclick="closeAll()"/>
+        <table style="width:450">
+            <thead> <img src="img/down_rent.png" style="position: relative; bottom: 34px;"/> </thead>
+            <tr>
+                <td>
+                    עיר
+                </td>
+                <td>
+                    <input type="text" id="down_city_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+רחוב
+                </td>
+                <td>
+                    <input type="text" id="down_street_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+מספר בית:
+                </td>
+                <td>
+                    <input type="text" id="down_house_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+מספר דירה:
+                </td>
+                <td>
+                    <input type="text" id="down_apr_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+שכ"ד ישן:
+                </td>
+                <td>
+                    <input type="text" id="down_old_in">
+                </td>
+            </tr>
+            <tr>
+                <td>
+שכ"ד חדש:
+                </td>
+                <td>
+                    <input type="text" id="down_new_in">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <img src="img/submit_button.png" class="pointer" onclick="submit_new_rent()"/>
+    </div>
+
+     <div id='check_dialog'>
+        <img src="img/close.png" class="pointer"  style="position: relative; left: -408px;z-index:100;" onclick="closeAll()"/>
+        <table style="width:450">
+            <thead> <img src="img/rent_up.png" style="position: relative; bottom: 34px;"/> </thead>
+            <tr>
+                <td>
+                    עיר
+                </td>
+                <td>
+                    <input type="text" id="up_city_out">
+                </td>
+            </tr>
+            <tr>
+                <td>
+רחוב
+                </td>
+                <td>
+                    <input type="text" id="up_street_out">
+                </td>
+            </tr>
+            <tr>
+                <td>
+מספר בית:
+                </td>
+                <td>
+                    <input type="text" id="up_house_out">
+                </td>
+            </tr>
+            <tr>
+                <td>
+מספר דירה:
+                </td>
+                <td>
+                    <input type="text" id="up_apr_out">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <div id='results'></div>
+        <img src="img/bdotBT.png" class="pointer" onclick="check_adrs()"/>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    function submit_new_rent(id){
+        var city=$('#up_city_in').val();
+        var street=$('#up_street_in').val();
+        var apr=$('#up_apr_in').val();
+        var house=$('#up_house_in').val();
+        var old=$('#up_old_in').val();
+        var newP=$('#up_new_in').val();
+        $.ajax({
+                type: "POST",
+              url: 'api/addReport',
+              data:"city="+city+
+                        "&street="+street+
+                        "&address="+house+
+                        "&apartment="+apr+
+                        "&oldPrice="+old+
+                        "&newPrice="+newP,
+              success: function(data) {
+                closeAll();
+              }
+            });
+    }
+
+    function submit_new_low_rent(id){
+        var city=$('#down_city_in').val();
+        var street=$('#down_street_in').val();
+        var apr=$('#down_apr_in').val();
+        var house=$('#down_house_in').val();
+        var old=$('#down_old_in').val();
+        var newP=$('#down_new_in').val();
+        $.ajax({
+                type: "POST",
+              url: 'api/addReport',
+              data:"city="+city+
+                        "&street="+street+
+                        "&address="+house+
+                        "&apartment="+apr+
+                        "&oldPrice="+old+
+                        "&newPrice="+newP,
+              success: function(data) {
+                closeAll();
+              }
+            });
+    }
+
+    function check_adrs(){
+        var city=$('#up_city_out').val();
+        var street=$('#up_street_out').val();
+        var apr=$('#up_apr_out').val();
+        var house=$('#up_house_out').val();
+        var old=$('#up_old_out').val();
+        var newP=$('#up_new_out').val();
+        $.ajax({
+                type: "POST",
+              url: 'api/check',
+              data:"city="+city+
+                        "&street="+street+
+                        "&address="+house+
+                        "&apartment="+apr,
+              success: function(data) {
+                var results=data.split(' ');
+                alert(results.length);
+                var str="";
+                if (results.length==1){
+                    str=    "  לא אותרה העלאת שכר דירה בכתובת זו.";
+                    var ih='<p class="good">'+str+'</p>';
+                    $('#results').html(ih);
+                }
+                  else{
+                    str=  " אותרה העלאת שכר דירה בבניין "  ;
+                    str+="<br>";
+                    for (var i=0;i<results.length-1;i++){
+                        str+= " -בדירה: ";
+                        str+=results[i];
+                        str+="<br>";
+                    }
+                     var ih='<p class="bad">'+str+'</p>';
+                    $('#results').html(ih);
+                }
+                alert(str);
+              }
+            });
+    }
+    function showDialog(id){
+        $('#'+id).dialog('open');
+    }
+
+    function closeAll(){
+        $('#check_dialog').dialog('close');
+        $('#rent_up_dialog').dialog('close');
+        $('#rent_down_dialog').dialog('close');
+    }
+
+    $(document).ready(function(){
+       init_map('map');
+       $('#rent_up_dialog').dialog({
+                    autoOpen: false,
+                    dialogClass: 'alert',
+                    width:500
+               });
+         $('#rent_down_dialog').dialog({
+                    autoOpen: false,
+                    dialogClass: 'alert',
+                    width:520
+               });
+        $('#check_dialog').dialog({
+                    autoOpen: false,
+                    dialogClass: 'alert',
+                    width:500
+               });
+        addMarkers({{ GOOD_LIST }},'map');
+        addMarkers({{ BAD_LIST }},'map');
+    });
+</script>
+{% endblock %}

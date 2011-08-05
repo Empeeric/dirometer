@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="http://www.facebook.com/2008/fbml"
+    dir="rtl"
+    xml:lang="{% firstof LANGUAGE_CODE 'en' %}"
+    lang="{% firstof LANGUAGE_CODE 'en' %}">
+  <head>
+    <title>דירומטר - נלחמים במחירי הדיור</title>
+    <meta property="og:title" content="דירומטר - נלחמים במחירי הדיור"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://dirometer.empeeric.com"/>
+    <meta property="og:image" content="http://velvetunderground.co.il/wp-content/uploads/2011/07/ohel1-150x150.jpg"/>
+    <meta property="fb:admins" content="813835025,642976675"/>
+    <meta property="og:site_name" content="דירומטר"/>
+    <meta property="og:description"
+          content="נלחמים בעלייה במחירי הדיור! מוסיפים דירות שבעלי הבית בהן העלה את הדירה, ולא משכירים מבעלי בית שהעלו את מחיר הבית!"/>
+    <script type="text/javascript" src="js/jquery-1.5.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.10.custom.js"></script>
+    <script type="text/javascript" src='http://openlayers.org/api//OpenLayers.js' ></script>
+    <script type="text/javascript" src="js/location.js" ></script>
+    <script src="https://maps-api-ssl.google.com/maps/api/js?v=3&sensor=false" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.13.custom.css" />
+    <style type="text/css">
+              body {
+                background-image:url('img/background.png');
+                padding:0px 50px
+              }
+
+            p{
+                color:white;
+                font:Arial;
+            }
+            h1{
+                color:white;
+                font:Arial;
+            }
+            h2{
+                color:white;
+                font:Arial;
+            }
+            a{
+                color:white;
+            }
+            .ui-dialog-titlebar {
+                background-color:white;
+                border:none;
+                height:10px;
+            }
+            #footer{
+                padding-top:50px;
+                padding-right:50px;
+                padding-right:30px;
+            }
+    </style>
+    {% block extra-css %}{% endblock %}
+
+    {% block preload_js %}{% endblock %}
+
+    {% block extra-head %}{% endblock %}
+  </head>
+
+  <body >
+
+    <div id="header">
+       <img src='img/header.png'>
+    </div>
+
+    <div class="columns">
+      <div id="content" class="column">
+        {% block content-header %}
+          {% if error %}<div class="error">{{ error }}</div>{% endif %}
+          {% if info %}<div class="info">{{ info }}</div>{% endif %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="info">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endblock %}
+
+
+      <div id='main_col'>
+        {% block content %}{% endblock %}
+
+        <div id='footer'>
+           <a href="http://www.empeeric.com"> <img src="img/logo.png" class="pointer"></a>
+            <span style="font:Arial; color:WHITE;" id="foorwe_text">נבנה ע"י אמפיריק</span>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+    {% block js %}
+    {% endblock %}
+  </body>
+</html>

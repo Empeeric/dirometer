@@ -1,0 +1,6 @@
+/logs
+*.pyc
+.idea
+*/.hg
+/.gaedata
+/djangoappengine/tests
