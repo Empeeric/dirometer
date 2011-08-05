@@ -24,6 +24,51 @@ $(document).ready( function ()
     geo = new google.maps.Geocoder();
 });
 
+function createMarker(ll, popupContentHTML, closeBox, overflow) {
+            popupClass=OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+            'autoSize': true,
+            'backgroundColor':"red"
+        });
+            var feature = new OpenLayers.Feature(radius_layer, ll);
+            feature.closeBox = closeBox;
+            feature.popupClass = popupClass;
+            feature.data.popupContentHTML = popupContentHTML;
+            feature.data.overflow = (overflow) ? "auto" : "hidden";
+
+            var marker = feature.createMarker();
+
+            var markerClick = function (evt) {
+                if (this.popup == null) {
+                    this.popup = this.createPopup(this.closeBox);
+                    map.addPopup(this.popup);
+                    this.popup.show();
+                } else {
+                    this.popup.toggle();
+                }
+                currentPopup = this.popup;
+                OpenLayers.Event.stop(evt);
+            };
+            marker.events.register("mouseover", feature, markerClick);
+            marker.events.register("mouseout", feature, markerClick);
+           return  marker
+        }
+
+function addMarker(lng,lat,street,house,oldP,newP){
+         var lonlat = new OpenLayers.LonLat(lng,lat).transform(
+	           cord_google,
+	           cord_map
+	       );
+        text='<p style="text-align:right; font-size:11px; color:black;">'+street+" "+house+":<br>"+'שכ"ד עלה מ-';
+        text+=oldP+ " ל ";
+        text+=newP+'</p>';
+        marker = createMarker(lonlat,text,false,false);
+        radius_layer.addMarker(marker);
+}
+
+function redrawMarkers(){
+    radius_layer.redraw();
+}
+
 function addMarkers(list,target){
     for (var i=0;i<list.length;i++){
         var lonlat = new OpenLayers.LonLat(list[i][0],list[i][1]).transform(

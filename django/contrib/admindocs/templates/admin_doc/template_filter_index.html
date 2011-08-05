@@ -36,7 +36,7 @@
     <h2>{% firstof library.grouper "Built-in filters" %}</h2>
     <ul>
     {% for filter in library.list|dictsort:"name" %}
-        <li><a href="#{{ library.grouper|default_if_none:"built_in" }}-{{ filter.name }}">{{ filter.name }}</a></li>
+        <li><a href="template_filter_index.html#{{ library.grouper|default_if_none:"built_in" }}-{{ filter.name }}">{{ filter.name }}</a></li>
     {% endfor %}
     </ul>
 </div>

@@ -80,7 +80,7 @@ def makeQuery(request):
     reports=RentReport.objects.filter(city=i_city,street=i_street,address=i_address)
     logging.info(reports)
     if len(reports)==0:
-       logging.info("########TTTTTTTT")
+       logging.info("###NOT FOUND")
        return HttpResponse("");
     else:
         uc=False
@@ -91,6 +91,7 @@ def makeQuery(request):
             else:
                 uc=True
         if uc:
-            resp=resp+"@"
+            resp=resp+" -1"
         logging.info("########"+resp)
         return HttpResponse(resp)
+

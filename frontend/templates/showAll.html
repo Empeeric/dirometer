@@ -1,0 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    {% for l in LIST %}
+        <table>
+            <td>
+                {{ l.lng }}   {{ l.lat }}  {{ l.city}}  {{ l.street }}  {{ l.address }} {{ l.apartment }}  {{ l.old_price }}  {{ l.new_price }}
+            </td>
+        </table>
+    {% endfor %}
+</body>
+</html>

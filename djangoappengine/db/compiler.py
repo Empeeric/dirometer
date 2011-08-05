@@ -1,6 +1,4 @@
 from .db_settings import get_model_indexes
-from .utils import commit_locked
-from .expressions import ExpressionEvaluator
 
 import datetime
 import sys
@@ -118,10 +116,7 @@ class GAEQuery(NonrelQuery):
             yield self._make_entity(entity)
 
         if executed and not isinstance(query, MultiQuery):
-            try:
-                self.query._gae_cursor = query.GetCompiledCursor()
-            except:
-                pass
+            self.query._gae_cursor = query.GetCompiledCursor()
 
     @safe_call
     def count(self, limit=None):
@@ -189,11 +184,11 @@ class GAEQuery(NonrelQuery):
                 key_type_error = 'Lookup values on primary keys have to be' \
                                  'a string or an integer.'
                 if lookup_type == 'range':
-                    if isinstance(value, (list, tuple)) and not (
-                            isinstance(value[0], (basestring, int, long)) and
+                    if isinstance(value,(list, tuple)) and not(isinstance(
+                            value[0], (basestring, int, long)) and \
                             isinstance(value[1], (basestring, int, long))):
                         raise DatabaseError(key_type_error)
-                elif not isinstance(value, (basestring, int, long)):
+                elif not isinstance(value,(basestring, int, long)):
                     raise DatabaseError(key_type_error)
                 # for lookup type range we have to deal with a list
                 if lookup_type == 'range':
@@ -473,53 +468,7 @@ class SQLInsertCompiler(NonrelInsertCompiler, SQLCompiler):
         return key.id_or_name()
 
 class SQLUpdateCompiler(NonrelUpdateCompiler, SQLCompiler):
-    def execute_sql(self, result_type=MULTI):
-        # modify query to fetch pks only and then execute the query
-        # to get all pks 
-        pk = self.query.model._meta.pk.name
-        self.query.add_immediate_loading([pk])
-        pks = [row for row in self.results_iter()]
-        self.update_entities(pks)
-        return len(pks)
-    
-    def update_entities(self, pks):
-        for pk in pks:
-            self.update_entity(pk[0])
-    
-    @commit_locked    
-    def update_entity(self, pk):
-        gae_query = self.build_query()
-        key = create_key(self.query.get_meta().db_table, pk)
-        entity = Get(key)
-        if not gae_query.matches_filters(entity):
-            return
-        
-        qn = self.quote_name_unless_alias
-        update_dict = {}
-        for field, o, value in self.query.values:
-            if hasattr(value, 'prepare_database_save'):
-                value = value.prepare_database_save(field)
-            else:
-                value = field.get_db_prep_save(value, connection=self.connection)
-            
-            if hasattr(value, "evaluate"):
-                assert not value.negated
-                assert not value.subtree_parents
-                value = ExpressionEvaluator(value, self.query, entity,
-                                                allow_joins=False)
-                
-            if hasattr(value, 'as_sql'):
-                # evaluate expression and return the new value
-                val = value.as_sql(qn, self.connection)
-                update_dict[field] = val
-            else:
-                update_dict[field] = value
-
-        for field, value in update_dict.iteritems():
-            db_type = field.db_type(connection=self.connection)
-            entity[qn(field.column)] = self.convert_value_for_db(db_type, value)
-
-        key = Put(entity)
+    pass
 
 class SQLDeleteCompiler(NonrelDeleteCompiler, SQLCompiler):
     pass

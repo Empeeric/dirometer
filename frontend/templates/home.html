@@ -7,7 +7,6 @@
         padding-bottom:50px;
         padding-top:20px;
     }
-    
     .good{
         background-color: #009933;
         border:black;
@@ -36,19 +35,23 @@
     <div id='info'>
         <h1>בעל הבית השתגע?</h1>
     <p>
-        בעל הבית שלכם מנסה להעלות לכם את שכר הדירה ולהעמידכם מול הברירה לשלם יותר או לעבור לרחוב?
+בעל או בעלת הבית שלכם מנסים להעלות לכם את שכר הדירה בכדי שתעמדו מול הברירה הבלתי אפשרית, לשלם או לעבור?
 <br>
         הוסיפו את כתובת הדירה ואת השינוי בשכר הדירה לאתר זה.
 <br>
         מחפשים דירה?
 <br>
-        הפגינו סולידריות חברתית, ולפני שאתם הולכים לראות דירה, בדקו האם היא מופיעה באתר. אם בעל הבית אכן העלה
+הפגינו סולידריות חברתית, ולפני שאתם הולכים לראות דירה, בדקו האם היא מופיעה באתר. אם בעל או בעלת הבית אכן העלו
 <br>
-        את שכר הדירה משנה שעברה, אל תלכו לראות את הדירה! הוא יעשה לכם את אותו הדבר שנה הבאה.
+את שכר הדירה משנה שעברה, אל תלכו לראות הדירה! הם יעשו לכם ולכן את אותו הדבר שנה הבאה.
 <br>
         לחצו לייק כדי להודיע שגם אתם לא שוכרים דירה מבעל בית שהעלה את שכר הדירה!
     </p>
-    <iframe src="http://www.facebook.com/plugins/like.php?app_id=239648889391600&amp;href=dirometer.empeeric.com&amp;send=false&amp;layout=standard&amp;width=320&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:320px; height:80px;" allowTransparency="true"></iframe>
+    <iframe src="http://www.facebook.com/plugins/like.php?app_id=239648889391600&amp;href=dirometer.empeeric.com&amp;send=true&amp;layout=standard&amp;width=320&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:320px; height:80px;" allowTransparency="true"></iframe>
+    <div style="position:relative;bottom:80px; left:-300px;">
+        <g:plusone></g:plusone>
+        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </div>
     </div>
     <div id="action_bar">
     <span>
@@ -123,6 +126,7 @@
         </table>
         <br>
         <br>
+        <div class="error" style="color:RED;"></div>
         <img src="img/submit_button.png" class="pointer" onclick="submit_new_rent()"/>
     </div>
 
@@ -181,6 +185,7 @@
         </table>
         <br>
         <br>
+         <div class="error" style="color:RED; width:120px" ></div>
         <img src="img/submit_button.png" class="pointer" onclick="submit_new_rent()"/>
     </div>
 
@@ -224,6 +229,7 @@
         <br>
         <br>
         <div id='results'></div>
+         <div class="error" style="color:RED;"></div>
         <img src="img/bdotBT.png" class="pointer" onclick="check_adrs()"/>
 
     </div>
@@ -240,19 +246,24 @@
         var house=$('#up_house_in').val();
         var old=$('#up_old_in').val();
         var newP=$('#up_new_in').val();
-        $.ajax({
-                type: "POST",
-              url: 'api/addReport',
-              data:"city="+city+
-                        "&street="+street+
-                        "&address="+house+
-                        "&apartment="+apr+
-                        "&oldPrice="+old+
-                        "&newPrice="+newP,
-              success: function(data) {
-                closeAll();
-              }
-            });
+        if (city==""||street==""||house==""||old==""||newP==""){
+            $('.error').html("בכדי לדווח על דירה יש צורך בשם העיר, הרחוב והבניין")
+        }else{
+            $.ajax({
+                    type: "POST",
+                  url: 'api/addReport',
+                  data:"city="+city+
+                            "&street="+street+
+                            "&address="+house+
+                            "&apartment="+apr+
+                            "&oldPrice="+old+
+                            "&newPrice="+newP,
+                  success: function(data) {
+                    closeAll();
+                      window.location.reload();
+                  }
+                });
+        }
     }
 
     function submit_new_low_rent(id){
@@ -262,19 +273,24 @@
         var house=$('#down_house_in').val();
         var old=$('#down_old_in').val();
         var newP=$('#down_new_in').val();
-        $.ajax({
-                type: "POST",
-              url: 'api/addReport',
-              data:"city="+city+
-                        "&street="+street+
-                        "&address="+house+
-                        "&apartment="+apr+
-                        "&oldPrice="+old+
-                        "&newPrice="+newP,
-              success: function(data) {
-                closeAll();
-              }
-            });
+        if (city==""||street==""||house==""||old==""||newP==""){
+            $('.error').html("בכדי לדווח על דירה יש צורך בשם העיר, הרחוב והבניין")
+        }else{
+            $.ajax({
+                    type: "POST",
+                  url: 'api/addReport',
+                  data:"city="+city+
+                            "&street="+street+
+                            "&address="+house+
+                            "&apartment="+apr+
+                            "&oldPrice="+old+
+                            "&newPrice="+newP,
+                  success: function(data) {
+                    closeAll();
+                      window.location.reload();
+                  }
+                });
+        }
     }
 
     function check_adrs(){
@@ -284,36 +300,41 @@
         var house=$('#up_house_out').val();
         var old=$('#up_old_out').val();
         var newP=$('#up_new_out').val();
-        $.ajax({
-                type: "POST",
-              url: 'api/check',
-              data:"city="+city+
-                        "&street="+street+
-                        "&address="+house+
-                        "&apartment="+apr,
-              success: function(data) {
-                var results=data.split(' ');
-                alert(results.length);
-                var str="";
-                if (results.length==1){
-                    str=    "  לא אותרה העלאת שכר דירה בכתובת זו.";
-                    var ih='<p class="good">'+str+'</p>';
-                    $('#results').html(ih);
-                }
-                  else{
-                    str=  " אותרה העלאת שכר דירה בבניין "  ;
-                    str+="<br>";
-                    for (var i=0;i<results.length-1;i++){
-                        str+= " -בדירה: ";
-                        str+=results[i];
-                        str+="<br>";
+        if (city==""||street==""||house==""){
+            $('.error').html("בכדי לבדוק דירה יש להכניס שם עיר, רחוב, ובניין. ניתן לראות מידע כללי במפה.")
+        }else{
+            $.ajax({
+                    type: "POST",
+                  url: 'api/check',
+                  data:"city="+city+
+                            "&street="+street+
+                            "&address="+house+
+                            "&apartment="+apr,
+                  success: function(data) {
+                    var results=data.split(' ');
+                    var str="";
+                      //alert(data);
+                    if (results.length==1){
+                        str=    "  לא אותרה העלאת שכר דירה בכתובת זו.";
+                        var ih='<p class="good">'+str+'</p>';
+                        $('#results').html(ih);
                     }
-                     var ih='<p class="bad">'+str+'</p>';
-                    $('#results').html(ih);
-                }
-                alert(str);
-              }
-            });
+                      else{
+                        str=  " אותרה העלאת שכר דירה בבניין "  ;
+                        str+="<br>";
+                        for (var i=0;i<results.length-1;i++){
+                            str+= " -בדירה: ";
+                            if (results[i]>=0)
+                                str+=results[i];
+                            else str+="שמספרה לא צויין";
+                            str+="<br>";
+                        }
+                         var ih='<p class="bad">'+str+'</p>';
+                        $('#results').html(ih);
+                    }
+                  }
+                });
+          }
     }
     function showDialog(id){
         $('#'+id).dialog('open');
@@ -323,6 +344,7 @@
         $('#check_dialog').dialog('close');
         $('#rent_up_dialog').dialog('close');
         $('#rent_down_dialog').dialog('close');
+        $('.error').html('');
     }
 
     $(document).ready(function(){
@@ -342,8 +364,13 @@
                     dialogClass: 'alert',
                     width:500
                });
-        addMarkers({{ GOOD_LIST }},'map');
-        addMarkers({{ BAD_LIST }},'map');
+        {% for r in BAD_LIST%}
+
+            addMarker( {{r.lng}} , {{r.lat}} ,'{{r.street}}','{{r.address}}', '{{r.old_price}}' ,'{{r.new_price}}');
+
+         {%endfor%}
+
+        redrawMarkers();
     });
 </script>
 {% endblock %}
