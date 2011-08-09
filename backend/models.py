@@ -1,6 +1,4 @@
 from django.db import models
-import settings
-
 
 ####################Defines extended user class###################
 class RentReport(models.Model):

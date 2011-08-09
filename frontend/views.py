@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response,redirect
 from backend.models import RentReport
 def home(request):
-    good=RentReport.objects.filter(price_up=False)
-    bad=RentReport.objects.filter(price_up=True)
+    good=[] #list(RentReport.objects.filter(price_up=False))
+    bad= list(RentReport.objects.filter(price_up=True))
 
     good_list=[]
     bad_list=[]

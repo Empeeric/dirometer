@@ -1,8 +1,6 @@
-﻿<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html >
 {% load i18n %}
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
     xmlns:og="http://ogp.me/ns#"
     xmlns:fb="http://www.facebook.com/2008/fbml"
     dir="rtl"
@@ -27,24 +25,44 @@
     <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.13.custom.css" />
     <style type="text/css">
               body {
-                background-image:url('img/background.png');
-                padding:0px 50px
+                background-image:url('img/bg.jpg');
+                padding:0px 0px;
+                margin:0px 0px 0px 0px;
               }
-
+            #all{
+                background-image:url('img/background.png');
+                float:right;
+                padding:10px 50px;
+                border-left-width:2px;
+                border-left-color:#f5f5f5;
+                border-left-style:solid;
+            }
             p{
                 color:white;
                 font-family:Arial;
+                font-size:12px;
+                line-height:20px;
+                margin-bottom:30px;
+            }
+            b{
+                color:white;
+                font-family:arial
             }
             h1{
                 color:white;
                 font-family:Arial;
+                font-size:20px;
             }
             h2{
                 color:white;
                 font-family:Arial;
+                font-size:12px;
+
             }
             a{
                 color:white;
+                font-family:Arial;
+                font-size:12px;
             }
             .ui-dialog-titlebar {
                 background-color:white;
@@ -52,10 +70,20 @@
                 height:10px;
             }
             #footer{
-                padding-top:50px;
-                padding-right:50px;
+                padding-top:20px;
                 padding-right:30px;
             }
+            #logo
+            {
+                width:83px;
+                height:80px;
+            }
+        #header_img{
+            position:relative;
+            left:30px;
+            width:500px;
+            height:200px;
+        }
     </style>
     {% block extra-css %}{% endblock %}
 
@@ -78,9 +106,9 @@
   </head>
 
   <body >
-
+<div id="all">
     <div id="header">
-       <img src='img/header.png'>
+       <img id="header_img" src='img/header.png'>
     </div>
 
     <div class="columns">
@@ -94,20 +122,20 @@
             {% endfor %}
           {% endif %}
         {% endblock %}
-
-
       <div id='main_col'>
         {% block content %}{% endblock %}
       
         <div id='footer'>
-           <a href="http://www.empeeric.com"> <img src="img/logo.png" class="pointer"></a>
-            <span style="font:Arial; color:WHITE;" id="foorwe_text">נבנה ע"י אמפיריק</span>
+           <a href="http://www.empeeric.com"> <img id="logo"  src="img/logo.png" class="pointer"></a>
+            <span style="font-family:Arial; color:WHITE;" id="foorwe_text">נבנה ע"י אמפיריק ,</span>
+            <a href="javascript:showDialog( 'contact_us_dialog' )">צור קשר</a>
         </div>
       </div>
 
     </div>
 
     </div>
+</div>
     {% block js %}
     {% endblock %}
   </body>

@@ -36,7 +36,8 @@ function createMarker(ll, popupContentHTML, closeBox, overflow) {
             feature.data.overflow = (overflow) ? "auto" : "hidden";
 
             var marker = feature.createMarker();
-
+             marker.icon.url = 'img/IGOL.png';
+             marker.icon.size = (new OpenLayers.Size(16,16));
             var markerClick = function (evt) {
                 if (this.popup == null) {
                     this.popup = this.createPopup(this.closeBox);

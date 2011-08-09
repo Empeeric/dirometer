@@ -13,6 +13,14 @@
         border-style:solid;
     }
 
+    .center{
+        position:relative;
+        left:-90px
+    }
+    input{
+        width:240px;
+    }
+
     .bad{
         background-color: #cc3300;
         border:black;
@@ -23,11 +31,27 @@
         padding-left:20px;
     }
 
+    img
+    {
+        padding:0px 0px 0px 0px;
+        margin: 0px 0px 0px 0px;
+    }
     #action_bar{
         padding-bottom:30px;
     }
     .pointer{
         cursor:pointer
+    }
+
+    .report_but
+    {
+        margin-right:30px;
+    }
+
+    .cu_input{
+        width:300px;
+        position:relative;
+        right:5px;
     }
 </style>
 {% endblock %}
@@ -35,35 +59,49 @@
     <div id='info'>
         <h1>בעל הבית השתגע?</h1>
     <p>
-בעל או בעלת הבית שלכם מנסים להעלות לכם את שכר הדירה בכדי שתעמדו מול הברירה הבלתי אפשרית, לשלם או לעבור?
-<br>
-        הוסיפו את כתובת הדירה ואת השינוי בשכר הדירה לאתר זה.
-<br>
-        מחפשים דירה?
-<br>
-הפגינו סולידריות חברתית, ולפני שאתם הולכים לראות דירה, בדקו האם היא מופיעה באתר. אם בעל או בעלת הבית אכן העלו
-<br>
-את שכר הדירה משנה שעברה, אל תלכו לראות הדירה! הם יעשו לכם ולכן את אותו הדבר שנה הבאה.
-<br>
-        לחצו לייק כדי להודיע שגם אתם לא שוכרים דירה מבעל בית שהעלה את שכר הדירה!
-    </p>
-    <iframe src="http://www.facebook.com/plugins/like.php?app_id=239648889391600&amp;href=dirometer.empeeric.com&amp;send=true&amp;layout=standard&amp;width=320&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:320px; height:80px;" allowTransparency="true"></iframe>
-    <div style="position:relative;bottom:80px; left:-300px;">
+בעל או בעלת הבית שלכם מנסים להעלות לכם את שכר הדירה בכדי שתעמדו מול הברירה הבלתי אפשרית,
+        <br>
+        <b>
+לשלם או לעבוד?
+        </b>
+        <br>
+הוסיפו את כתובת הדירה ואת השינוי בשכר הדירה לאתר זה.
+        <br>
+        <b>
+מחפשים דירה?
+        </b>
+        <br>
+הפגינו סולידריות חברתית, ולפני שתלכו לראות דירה, בדקו האם היא מופיעה באתר.
+        <br>
+אם בעל או בעלת הדירה אכן העלו את שכר הדירה מהשנה שעברה, 
+        <br>
+        <b>
+אל תלכו לראות את הדירה! הם יעשו לכם ולכן את אותו הדבר בשנה הבאה.
+            <br>
+לחצו לייק בכדי להודיע שגם אתם לא תשכירו דירה מבעל או בעלת בית שהעלו את שכר בדירה!
+            <br>
+            <br>
+            דווחו, ועזרו להחזיר את כוח המיקוח לשוכרים ולשוכרות!
+        </b>
+        </p>
+
+    <iframe src="http://www.facebook.com/plugins/like.php?app_id=185151921550951&amp;href=http%3A%2F%2Fdirometer.empeeric.com%2F&amp;send=false&amp;layout=standard&amp;width=320&amp;show_faces=true&amp;action=like&amp;colorscheme=dark&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:320px; height:80px;" allowTransparency="true"></iframe>
+    <div style="position:relative;bottom:87px; left:-300px;">
         <g:plusone></g:plusone>
         <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     </div>
     </div>
     <div id="action_bar">
     <span>
-        <img src='img/up.png'>
+        <img src='img/up.png' class="report_but">
         <a href="javascript:showDialog('rent_up_dialog')" >דווח על עליה בשכ"ד</a>
     </span>
       <span>
-        <img src='img/down.png'>
+        <img src='img/down.png' class="report_but">
         <a href="javascript:showDialog('rent_down_dialog')">דווח על ירידה בשכ"ד</a>
       </span>
         <span>
-        <img src='img/check.png'>
+        <img src='img/check.png' class="report_but">
         <a href="javascript:showDialog('check_dialog')">בדוק עליה/ירידה בשכ"ד</a>
          </span>
     </div>
@@ -186,7 +224,7 @@
         <br>
         <br>
          <div class="error" style="color:RED; width:120px" ></div>
-        <img src="img/submit_button.png" class="pointer" onclick="submit_new_rent()"/>
+        <img src="img/submit_button.png" class="pointer center" onclick="submit_new_rent()"/>
     </div>
 
      <div id='check_dialog'>
@@ -198,7 +236,7 @@
                     עיר
                 </td>
                 <td>
-                    <input type="text" id="up_city_out">
+                    <input type="text" id="up_city_out" >
                 </td>
             </tr>
             <tr>
@@ -206,7 +244,7 @@
 רחוב
                 </td>
                 <td>
-                    <input type="text" id="up_street_out">
+                    <input type="text" id="up_street_out" >
                 </td>
             </tr>
             <tr>
@@ -214,7 +252,7 @@
 מספר בית:
                 </td>
                 <td>
-                    <input type="text" id="up_house_out">
+                    <input type="text" id="up_house_out" >
                 </td>
             </tr>
             <tr>
@@ -222,7 +260,7 @@
 מספר דירה:
                 </td>
                 <td>
-                    <input type="text" id="up_apr_out">
+                    <input type="text" id="up_apr_out" >
                 </td>
             </tr>
         </table>
@@ -230,11 +268,70 @@
         <br>
         <div id='results'></div>
          <div class="error" style="color:RED;"></div>
-        <img src="img/bdotBT.png" class="pointer" onclick="check_adrs()"/>
+        <img src="img/bdotBT.png" class="pointer center" onclick="check_adrs()"/>
 
     </div>
 
+    
+     <div id='contact_us_dialog'>
 
+         <img src="img/close.png" class="pointer"  style="position: relative; left: -408px;z-index:100;" onclick="closeAll()"/>
+         <form action="http://sobo.empeeric.com/contact_us" method="POST" id="cu_form" target="target_frame">
+        <table style="width:450">
+            <thead>
+                <img src="img/ContactUS.png" USEMAP="#contactus" BORDER=0 style="position: relative;top: -55px;width: 460px;">
+                <map name="contactus">
+                  <area name="EmpMap" shape="rect" target="_blank" coords="385,20,484,114" href="http://maps.google.com/maps?q=Empeeric,+HaArba'a,+Tel+Aviv,+Israel&hl=iw&ie=UTF8&view=map&cid=8231709356392748197&iwloc=A&ved=0CBcQpQY&sa=X&ei=EwNBTrTnFsepjgeAp4X2DA"  alt="" title="">
+                  <area shape="linkedIn" coords="246,22,265,41" href="http://www.linkedin.com/company/empeeric"  alt="" title="" target="_blank">
+                  <area shape="twiter" coords="219,22,238,41" href="http://twitter.com/#!/empeeric"  alt="" title="" target="_blank">
+                  <area shape="facebook" coords="194,22,213,41" href="https://www.facebook.com/pages/Empeeric/118595041499083"  alt="" title="" target="_blank">
+                  <area shape="mail" coords="197,70,318,83" href="mailto:info@empeeric.com"  alt="" title="">
+                </map>
+            </thead>
+            <tr>
+                <td>
+            <tr>
+                <td>
+שם:
+                </td>
+                <td>
+                    <input type="text" id="name_in" name="senders_name" class="cu_input">
+                </td>
+            </tr>
+            <tr>
+                <td>
+מייל:
+                </td>
+                <td>
+                    <input type="text" id="mail_in" name="senders_email" class="cu_input">
+                </td>
+            </tr>
+            <tr>
+                <td>
+כותרת ההודעה:
+                </td>
+                <td>
+                    <input type="text" id="title_in" name="message_subject" class="cu_input">
+                </td>
+            </tr>
+            <tr>
+                    <td>
+תוכן ההודעה:
+                    </td>
+                    <td>
+                        <textarea  id="msg_in" name="message_content" class="cu_input"></textarea>
+                    </td>
+            </tr>
+        </table>
+         </form>
+        <br>
+        <br>
+        <div id='results'></div>
+         <div class="error" style="color:RED;"></div>
+        <img src="img/SHLSCH.png" class="pointer center" id="cu_btn"/>
+
+    </div>
+    <iframe id="target" style="width:0px;height:0px; display:none;" name="target_frame"></iframe>
 {% endblock %}
 
 {% block js %}
@@ -264,6 +361,11 @@
                   }
                 });
         }
+    }
+
+    function contact_us(){
+       $('#cu_form').submit();
+        closeAll();
     }
 
     function submit_new_low_rent(id){
@@ -344,25 +446,33 @@
         $('#check_dialog').dialog('close');
         $('#rent_up_dialog').dialog('close');
         $('#rent_down_dialog').dialog('close');
+        $('#contact_us_dialog').dialog('close');
         $('.error').html('');
     }
 
     $(document).ready(function(){
        init_map('map');
+    
+       $('#cu_btn').click(contact_us);
        $('#rent_up_dialog').dialog({
                     autoOpen: false,
-                    dialogClass: 'alert',
-                    width:500
+                 //   dialogClass: 'alert',
+                   width:580
                });
          $('#rent_down_dialog').dialog({
                     autoOpen: false,
-                    dialogClass: 'alert',
-                    width:520
+                 //  dialogClass: 'alert',
+                    width:580
                });
         $('#check_dialog').dialog({
                     autoOpen: false,
-                    dialogClass: 'alert',
-                    width:500
+                 //   dialogClass: 'alert',
+                    width:570
+               });
+        $('#contact_us_dialog').dialog({
+                    autoOpen: false,
+                 //  dialogClass: 'alert',
+                   width:580
                });
         {% for r in BAD_LIST%}
 

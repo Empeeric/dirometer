@@ -1,9 +1,7 @@
-from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse
 from models import RentReport
 from google.appengine.api.urlfetch import Fetch
 import settings
-from googlemaps import GoogleMaps
 import logging
 import urllib
 try:
