@@ -1,0 +1,21 @@
+[INFO     2011-08-16 11:51:09,736 bulkloader.py] Logging to bulkloader-log-20110816.115109
+[INFO     2011-08-16 11:51:09,736 bulkloader.py] Throttling transfers:
+[INFO     2011-08-16 11:51:09,736 bulkloader.py] Bandwidth: 250000 bytes/second
+[INFO     2011-08-16 11:51:09,737 bulkloader.py] HTTP connections: 8/second
+[INFO     2011-08-16 11:51:09,739 bulkloader.py] Entities inserted/fetched/modified: 20/second
+[INFO     2011-08-16 11:51:09,740 bulkloader.py] Batch Size: 10
+[INFO     2011-08-16 11:51:09,740 bulkloader.py] Opening database: bulkloader-progress-20110816.115109.sql3
+[INFO     2011-08-16 11:51:10,155 bulkloader.py] Opening database: bulkloader-results-20110816.115109.sql3
+[DEBUG    2011-08-16 11:51:10,466 adaptive_thread_pool.py] [Thread-1] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,466 adaptive_thread_pool.py] [Thread-2] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,466 adaptive_thread_pool.py] [Thread-3] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,466 adaptive_thread_pool.py] [Thread-4] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,467 adaptive_thread_pool.py] [Thread-5] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,467 adaptive_thread_pool.py] [Thread-6] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,467 adaptive_thread_pool.py] [Thread-7] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,467 adaptive_thread_pool.py] [Thread-8] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,467 adaptive_thread_pool.py] [Thread-9] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,467 bulkloader.py] Configuring remote_api. url_path = /_ah/remote_api, servername = dirometer.appspot.com
+[DEBUG    2011-08-16 11:51:10,467 adaptive_thread_pool.py] [Thread-10] WorkerThread: started
+[DEBUG    2011-08-16 11:51:10,470 bulkloader.py] Bulkloader using app_id: dirometer.appspot.com
+[INFO     2011-08-16 11:51:10,470 bulkloader.py] Connecting to dirometer.appspot.com/_ah/remote_api

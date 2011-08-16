@@ -9,7 +9,7 @@ try:
 except ImportError:
     import simplejson as json
 
-UNSPECIFIED_APARTMENT=-1
+UNSPECIFIED=0
 
 def getGeoLocation(city,street,number):
     '''g
@@ -45,16 +45,19 @@ def addReport(request):
     i_apartment=request.POST.get('apartment')
     i_oldPrice=request.POST.get('oldPrice')
     i_newPrice=request.POST.get('newPrice')
+    i_rooms=request.POST.get('rooms')
 
     if not i_apartment:
-        i_apartment=UNSPECIFIED_APARTMENT
+        i_apartment=UNSPECIFIED
+    if not i_rooms:
+        i_rooms=UNSPECIFIED
     report, created=RentReport.objects.get_or_create(city=i_city,street=i_street,address=i_address,apartment=i_apartment)
     if created:
         report.old_price=int(i_oldPrice)
         report.new_price=int(i_newPrice)
+        report.num_of_rooms=i_rooms
         lat,lng=getGeoLocation(i_city,i_street,i_address)
         if lat and lng:
-            logging.info("&&&&&^^^^^^^&&&&&")
             report.lat=lat
             report.lng=lng
         if i_oldPrice<i_newPrice:
@@ -63,7 +66,9 @@ def addReport(request):
             report.price_up=False
         report.save()
     else:
-        pass
+        report.new_price=int(i_newPrice)
+        if i_rooms!=UNSPECIFIED:
+            report.num_of_rooms=i_rooms
     if request.POST.get('respHtml'):
         return HttpResponse('Html will come here')
     else:
@@ -78,18 +83,22 @@ def makeQuery(request):
     reports=RentReport.objects.filter(city=i_city,street=i_street,address=i_address)
     logging.info(reports)
     if len(reports)==0:
-       logging.info("###NOT FOUND")
        return HttpResponse("");
     else:
         uc=False
         resp=""
         for report in reports:
-            if report.apartment!=UNSPECIFIED_APARTMENT:
+            if report.apartment!=UNSPECIFIED:
                 resp=resp+str(report.apartment)+" "
             else:
                 uc=True
         if uc:
             resp=resp+" -1"
-        logging.info("########"+resp)
         return HttpResponse(resp)
 
+def update_mobile(request):
+    logging.info("POST:"+str(request.POST))
+    return HttpResponse('ok')
+
+def get_sync_data(request):
+     return HttpResponse(json.dumps(settings.CHECK_LIST))

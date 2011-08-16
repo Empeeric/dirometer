@@ -56,3 +56,10 @@ GOOGLE_MAPS_API_KEY="ABQIAAAAnc7jlR_9nQgBjuMDVxFJUhQFwM1dKL5IwzzppoLBjK1Y6n9veBQ
 WAZE_API="0687a712-ca4d-4116-953d-faf15bbd86e0"
 
 GEOCODE_URL="http://geocoding.cloudmade.com/95739caddbc446dd933b9f391daf9842/geocoding/v2/find.js?query=street:%(street)s;city:%(city)s;house:%(house)s;country:israel"
+
+CHECK_LIST=[
+    ( 'Q1' , 'Is the place big?' , True ) ,
+    ( 'Q2' , 'Does it have a roof?' , True) ,
+    ( 'Q3' , 'Can you see the moon on a bright night?', True) ,
+    ( 'Q4' ,  'How good is it?'  , False )
+]

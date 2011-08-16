@@ -8,6 +8,7 @@
     lang="{% firstof LANGUAGE_CODE 'en' %}">
   <head>
     <title>דירומטר - נלחמים במחירי הדיור</title>
+  <meta name="viewport" content="width=100%, initial-scale=1">
     <meta property="og:title" content="דירומטר - נלחמים במחירי הדיור"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://dirometer.empeeric.com"/>
@@ -24,11 +25,6 @@
       <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.13.custom.css" />
     <style type="text/css">
-              body {
-                background-image:url('img/bg.jpg');
-                padding:0px 0px;
-                margin:0px 0px 0px 0px;
-              }
             #all{
                 background-image:url('img/background.png');
                 float:right;
@@ -45,7 +41,7 @@
                 margin-bottom:30px;
             }
             b{
-                color:white;
+                color:inherit;
                 font-family:arial
             }
             h1{
@@ -75,6 +71,7 @@
             }
             #logo
             {
+                border-style: none;
                 width:83px;
                 height:80px;
             }
@@ -108,7 +105,9 @@
   <body >
 <div id="all">
     <div id="header">
+        {% block head %}
        <img id="header_img" src='img/header.png'>
+        {% endblock %}
     </div>
 
     <div class="columns">
@@ -124,12 +123,13 @@
         {% endblock %}
       <div id='main_col'>
         {% block content %}{% endblock %}
-      
+      {% block footer %}
         <div id='footer'>
            <a href="http://www.empeeric.com"> <img id="logo"  src="img/logo.png" class="pointer"></a>
             <span style="font-family:Arial; color:WHITE;" id="foorwe_text">נבנה ע"י אמפיריק ,</span>
             <a href="javascript:showDialog( 'contact_us_dialog' )">צור קשר</a>
         </div>
+      {% endblock %}
       </div>
 
     </div>

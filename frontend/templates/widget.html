@@ -1,31 +1,80 @@
 {% extends 'base.html' %}
 {%  block extra-css %}
 <style type="text/css">
-     body {
-                background-image:url('img/bg.jpg');
-                padding:0px 0px;
-                margin:0px 0px 0px 0px;
-              }
+    html{
+        height: 500px;
+        width: 290px;
+        margin: 0px 0px 0px 0px;
+    }
+    body{
+        height: 500px;
+        width: 290px;
+        margin: 0px 0px 0px 0px;
+    }
+    #all{
+        height: 500px;
+        width: 290px;
+        padding: 0px 4px 5px 5px;
+        margin: 0px 0px 0px 0px;
+    }
     #map{
-        width:600px;
-        height:450px;
-        padding-bottom:50px;
-        padding-top:20px;
+        width:290px;
+        height:388px;
+        padding-bottom:0px;
+        padding-top:0px;
     }
     .good{
         background-color: #009933;
         border:black;
         border-style:solid;
     }
-
-    .center{
+    .screen_name{
+        position: fixed;
+        right: 75px;
+        top: 25px;
+        font-family: arial;
+        color: #44589c;
+    }
+    .screen{
+        display: none;
+        position: absolute;
+        right: 0px;
+        top:0px;
+        background-color: #ffffff;
+        height: 505px;
+        width: 301px;
+    }
+    .error{
+        font-family: arial;
+        width: 280px;
+        margin-right: 10px;
+        color: RED;
         position: relative;
-        left: -119px;
+        top: -35px;
+        display: inline-block;
+    }
+    #results{
+        font-family: arial;
+        width: 280px;
+        margin-right: 10px;
+        position: relative;
+        top: -35px;
+    }
+    .center{
+        position: fixed;
+        left: 50px;
+        bottom: 10px;
     }
     input{
-        width:240px;
+        width:210px;
+        margin-left: 10px;
+        margin-bottom: 10px;
     }
-
+    table{
+        font-family: arial;
+        font-size: 12px;
+        padding-right: 5px;
+    }
     .bad{
         background-color: #cc3300;
         border:black;
@@ -42,14 +91,23 @@
         margin: 0px 0px 0px 0px;
     }
     #action_bar{
-        padding-bottom:30px;
+        padding-bottom:3px;
     }
     .pointer{
         cursor:pointer
     }
     .report_but
     {
-        margin-right:30px;
+        margin-right:1px;
+        height: 25px;
+    }
+
+    #header_img
+    {
+    position: relative;
+    left: 4px;
+    width: 299px;
+    height: 75px;
     }
 
     .ui-dialog{
@@ -60,136 +118,48 @@
         position:relative;
         right:5px;
     }
+    .report_link{
+        position: relative;
+        bottom: 7px;
+    }
 </style>
 {% endblock %}
-{% block content %}
-    <div id='info'>
-        <h1>בעל הבית השתגע?</h1>
-    <p>
-בעל או בעלת הבית שלכם מנסים להעלות לכם את שכר הדירה בכדי שתעמדו מול הברירה הבלתי אפשרית,
-        <br>
-        <b>
-לשלם או לעבוד?
-        </b>
-        <br>
-הוסיפו את כתובת הדירה ואת השינוי בשכר הדירה לאתר זה.
-        <br>
-        <b>
-מחפשים דירה?
-        </b>
-        <br>
-הפגינו סולידריות חברתית, ולפני שתלכו לראות דירה, בדקו האם היא מופיעה באתר.
-        <br>
-אם בעל או בעלת הדירה אכן העלו את שכר הדירה מהשנה שעברה, 
-        <br>
-        <b>
-אל תלכו לראות את הדירה! הם יעשו לכם ולכן את אותו הדבר בשנה הבאה.
-            <br>
-לחצו לייק בכדי להודיע שגם אתם לא תשכירו דירה מבעל או בעלת בית שהעלו את שכר בדירה!
-            <br>
-            <br>
-            דווחו, ועזרו להחזיר את כוח המיקוח לשוכרים ולשוכרות!
-        </b>
-        </p>
 
-    <iframe src="http://www.facebook.com/plugins/like.php?app_id=185151921550951&amp;href=http%3A%2F%2Fdirometer.empeeric.com%2F&amp;send=false&amp;layout=standard&amp;width=320&amp;show_faces=true&amp;action=like&amp;colorscheme=dark&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:320px; height:80px;" allowTransparency="true"></iframe>
-    <div style="position:relative;bottom:87px; left:-300px;">
-        <g:plusone></g:plusone>
-        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    </div>
-    </div>
+ {% block head %}
+       <img id="header_img" src='img/wheader.png'>
+        {% endblock %}
+{% block content %}
+{#    <iframe src="http://www.facebook.com/plugins/like.php?app_id=185151921550951&amp;href=http%3A%2F%2Fdirometer.empeeric.com%2F&amp;send=false&amp;layout=standard&amp;width=320&amp;show_faces=true&amp;action=like&amp;colorscheme=dark&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:320px; height:80px;" allowTransparency="true"></iframe>#}
+{#    <div style="position:relative;bottom:87px; left:-300px;">#}
+{#        <g:plusone></g:plusone>#}
+{#        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>#}
+{#    </div>#}
+<div id="main">
     <div id="action_bar">
-    <span>
-        <img src='img/up.png' class="report_but">
-        <a href="javascript:showDialog('rent_up_dialog')" >דווח על עליה בשכ"ד</a>
-    </span>
       <span>
         <img src='img/down.png' class="report_but">
-        <a href="javascript:showDialog('rent_down_dialog')">דווח על ירידה בשכ"ד</a>
+        <a class="report_link" href="javascript:showDialog('rent_dialog')">דווח על שינוי בשכ"ד</a>
       </span>
         <span>
         <img src='img/check.png' class="report_but">
-        <a href="javascript:showDialog('check_dialog')">בדוק עליה/ירידה בשכ"ד</a>
+        <a class="report_link" href="javascript:showDialog('check_dialog')">בדוק עליה/ירידה בשכ"ד</a>
          </span>
     </div>
     <div id='map_view'>
         <div id='map'> </div>
     </div>
+</div>
 
-    <div id='rent_up_dialog'>
-        <img src="img/close.png" class="pointer" style="position: relative; left: -408px;z-index:100;"  onclick="closeAll()"/>
-        <table style="width:450">
-            <thead> <img src="img/rent_up.png" style="position: relative; bottom: 34px;"/> </thead>
-            <tr>
-                <td>
-                    עיר
-                </td>
-                <td>
-                    <input type="text" id="up_city_in">
-                </td>
-            </tr>
-            <tr>
-                <td>
-רחוב
-                </td>
-                <td>
-                    <input type="text" id="up_street_in">
-                </td>
-            </tr>
-            <tr>
-                <td>
-מספר בית:
-                </td>
-                <td>
-                    <input type="text" id="up_house_in">
-                </td>
-            </tr>
-            <tr>
-                <td>
-מספר דירה:
-                </td>
-                <td>
-                    <input type="text" id="up_apr_in">
-                </td>
-            </tr>
-                        <tr>
-                <td>
-מספר חדרים:
-                </td>
-                <td>
-                    <input type="text" id="up_rooms">
-                </td>
-            </tr>
-            <tr>
-                <td>
-שכ"ד ישן:
-                </td>
-                <td>
-                    <input type="text" id="up_old_in">
-                </td>
-            </tr>
-            <tr>
-                <td>
-שכ"ד חדש:
-                </td>
-                <td>
-                    <input type="text" id="up_new_in">
-                </td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <div class="error" style="color:RED;"></div>
-        <img src="img/submit_button.png" class="pointer center" onclick="submit_new_rent()"/>
-    </div>
 
-     <div id='rent_down_dialog'>
-        <img src="img/close.png" class="pointer" style="position: relative; left: -408px;z-index:100;"  onclick="closeAll()"/>
+     <div id='rent_dialog' class="screen">
+        <img src="img/close.png" class="pointer" style="position: relative; left: -260px;z-index:100;"  onclick="closeAll()"/>
         <table style="width:450">
-            <thead> <img src="img/down_rent.png" style="position: relative; bottom: 34px;"/> </thead>
+            <thead> <img src="img/rent.png" style="position: relative; bottom: 34px;"/>
+            <span class="screen_name"><b>דווח על שינוי בשכ"ד</b></span>
+            </thead>
             <tr>
                 <td>
-                    עיר
+            עיר:
                 </td>
                 <td>
                     <input type="text" id="down_city_in">
@@ -197,7 +167,7 @@
             </tr>
             <tr>
                 <td>
-רחוב
+רחוב:
                 </td>
                 <td>
                     <input type="text" id="down_street_in">
@@ -246,17 +216,19 @@
         </table>
         <br>
         <br>
-         <div class="error" style="color:RED; width:120px" ></div>
+         <div class="error" ></div>
         <img src="img/submit_button.png" class="pointer center" onclick="submit_new_rent()"/>
     </div>
 
-     <div id='check_dialog'>
-        <img src="img/close.png" class="pointer"  style="position: relative; left: -408px;z-index:100;" onclick="closeAll()"/>
-        <table style="width:450">
-            <thead> <img src="img/rent_up.png" style="position: relative; bottom: 34px;"/> </thead>
+     <div id='check_dialog' class="screen">
+        <img src="img/close.png" class="pointer"  style="position: relative; left: -260px;z-index:100;" onclick="closeAll()"/>
+         <table>
+        <thead> <img src="img/rent.png" style="position: relative; bottom: 34px;"/>
+            <span class="screen_name"><b>חפש שינויים בשכ"ד</b></span>
+            </thead>
             <tr>
                 <td>
-                    עיר
+                    עיר:
                 </td>
                 <td>
                     <input type="text" id="up_city_out" >
@@ -264,7 +236,7 @@
             </tr>
             <tr>
                 <td>
-רחוב
+רחוב:
                 </td>
                 <td>
                     <input type="text" id="up_street_out" >
@@ -290,15 +262,15 @@
         <br>
         <br>
         <div id='results'></div>
-         <div class="error" style="color:RED;"></div>
+         <div class="error"></div>
         <img src="img/bdotBT.png" class="pointer center" onclick="check_adrs()"/>
 
     </div>
 
     
-     <div id='contact_us_dialog'>
+     <div id='contact_us_dialog' class="screen">
 
-         <img src="img/close.png" class="pointer"  style="position: relative; left: -408px;z-index:100;" onclick="closeAll()"/>
+         <img src="img/close.png" class="pointer"  style="position: relative; left: -260px;z-index:100;" onclick="closeAll()"/>
          <form action="http://sobo.empeeric.com/contact_us" method="POST" id="cu_form" target="target_frame">
         <table style="width:450">
             <thead>
@@ -349,51 +321,25 @@
          </form>
         <br>
         <br>
-        <div id='results'></div>
-         <div class="error" style="color:RED;"></div>
         <img src="img/SHLSCH.png" class="pointer center" id="cu_btn"/>
+        <div class="error" style="color:RED;"></div>
 
     </div>
     <iframe id="target" style="width:0px;height:0px; display:none;" name="target_frame"></iframe>
 {% endblock %}
 
+{% block footer %}
+{%  endblock %}
+
 {% block js %}
 <script type="text/javascript">
-    function submit_new_rent(id){
-        var city=$('#up_city_in').val();
-        var street=$('#up_street_in').val();
-        var apr=$('#up_apr_in').val();
-        var house=$('#up_house_in').val();
-        var old=$('#up_old_in').val();
-        var newP=$('#up_new_in').val();
-        var rooms=$('#up_rooms').val();
-        if (city==""||street==""||house==""||old==""||newP==""){
-            $('.error').html("בכדי לדווח על דירה יש צורך בשם העיר, הרחוב והבניין")
-        }else{
-            $.ajax({
-                    type: "POST",
-                  url: 'api/addReport',
-                  data:"city="+city+
-                            "&street="+street+
-                            "&address="+house+
-                            "&apartment="+apr+
-                            "&oldPrice="+old+
-                            "&newPrice="+newP+
-                            "&rooms="+rooms,
-                  success: function(data) {
-                    closeAll();
-                      window.location.reload();
-                  }
-                });
-        }
-    }
 
     function contact_us(){
        $('#cu_form').submit();
         closeAll();
     }
 
-    function submit_new_low_rent(id){
+    function submit_new_rent(id){
         var city=$('#down_city_in').val();
         var street=$('#down_street_in').val();
         var apr=$('#down_apr_in').val();
@@ -412,7 +358,8 @@
                             "&address="+house+
                             "&apartment="+apr+
                             "&oldPrice="+old+
-                            "&newPrice="+newP,
+                            "&newPrice="+newP+
+                            "&rooms="+rooms,
                   success: function(data) {
                     closeAll();
                       window.location.reload();
@@ -465,14 +412,13 @@
           }
     }
     function showDialog(id){
-        $('#'+id).dialog('open');
+        $('#'+id).fadeIn(100);
+        $('#main').fadeOut(100);
     }
 
     function closeAll(){
-        $('#check_dialog').dialog('close');
-        $('#rent_up_dialog').dialog('close');
-        $('#rent_down_dialog').dialog('close');
-        $('#contact_us_dialog').dialog('close');
+        $('.screen').fadeOut(100);
+        $('#main').fadeIn(100);
         $('.error').html('');
     }
 
@@ -480,30 +426,7 @@
        init_map('map');
     
        $('#cu_btn').click(contact_us);
-       $('#rent_up_dialog').dialog({
-                    autoOpen: false,
-                 //   dialogClass: 'alert',
-                   width:580,
-                    zIndex:1005
-               });
-         $('#rent_down_dialog').dialog({
-                    autoOpen: false,
-                 //  dialogClass: 'alert',
-                    width:580,
-                    zIndex:1006
-               });
-        $('#check_dialog').dialog({
-                    autoOpen: false,
-                 //   dialogClass: 'alert',
-                    width:570,
-                    zIndex:1007
-               });
-        $('#contact_us_dialog').dialog({
-                    autoOpen: false,
-                 //  dialogClass: 'alert',
-                   width:580,
-                    zIndex:1008
-               });
+
         {% for r in BAD_LIST%}
 
             addMarker( {{r.lng}} , {{r.lat}} ,'{{r.street}}','{{r.address}}', '{{r.old_price}}' ,'{{r.new_price}}',{{ r.apartment }},{{ r.num_of_rooms }});

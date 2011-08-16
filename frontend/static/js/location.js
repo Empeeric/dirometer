@@ -54,14 +54,27 @@ function createMarker(ll, popupContentHTML, closeBox, overflow) {
            return  marker
         }
 
-function addMarker(lng,lat,street,house,oldP,newP){
+function addMarker(lng,lat,street,house,oldP,newP,apr,rooms){
          var lonlat = new OpenLayers.LonLat(lng,lat).transform(
 	           cord_google,
 	           cord_map
 	       );
-        text='<p style="text-align:right; font-size:11px; color:black;">'+street+" "+house+":<br>"+'שכ"ד עלה מ-';
-        text+=oldP+ " ל ";
-        text+=newP+'</p>';
+        if (apr==0){
+            apr='לא צויין';
+        }
+        if (rooms==0){
+            rooms=' לא צויין';
+        }
+        var text;
+        text="כתובת:";
+        text+=street+" "+house+"  דירה: "+apr+"<br>";
+        text+="מספר חדרים:";
+        text+=rooms+"<br>";
+        text+=' שכ"ד עלה מ-';
+        text+=oldP;
+        text+=" ל-";
+        text+=newP;
+        text='<p style="text-align:right; font-size:11px; color:black;">'+text+'</p>';
         marker = createMarker(lonlat,text,false,false);
         radius_layer.addMarker(marker);
 }
