@@ -13,18 +13,10 @@ class RentReport(models.Model):
     lng = models.FloatField( null = True )
     lat = models.FloatField( null = True )
 
-
-class MobileFullReport(models.Model):
-    address = models.CharField(max_length=100,blank=False,null=False)
-    number = models.IntegerField()
-    lon = models.FloatField()
-    lat = models.FloatField()
-    real_loc = models.BooleanField(default=True)
-
 class SingleRank(models.Model):
     is_boolean=models.BooleanField(default=False)
-    owner_report = models.ForeignKey(MobileFullReport)
-    id = models.IntegerField(default=0)
+    owner_report = models.ForeignKey('MobileFullReport')
+    rid = models.IntegerField(default=0)
     ranks_sum = models.IntegerField(default=0)
     num_of_ranks = models.IntegerField(default=0)
 
@@ -40,6 +32,22 @@ class SingleRank(models.Model):
                 return 0
         else:
             return self.ranks_sum / self.num_of_ranks
+
+class MobileFullReport(models.Model):
+    address = models.CharField(max_length=100,blank=False,null=False)
+    number = models.IntegerField()
+    lon = models.FloatField()
+    lat = models.FloatField()
+    real_loc = models.BooleanField(default=True)
+
+    def getSimpleObject(self):
+        ranks=[ (i.rid, i.getRank() ) for i in list(SingleRank.objects.filter(owner_report=self) ) ]
+        self.ranks=ranks
+        return self
+
+        
+
+
 
 
 

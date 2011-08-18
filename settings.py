@@ -63,3 +63,6 @@ CHECK_LIST=[
     ( 'Q3' , 'Can you see the moon on a bright night?', True) ,
     ( 'Q4' ,  'How good is it?'  , False )
 ]
+
+MAX_MARKERS=300
+MAX_NEAR_ITEMS = 150

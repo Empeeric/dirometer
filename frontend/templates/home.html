@@ -180,7 +180,7 @@
         <br>
         <br>
         <div class="error" style="color:RED;"></div>
-        <img src="img/submit_button.png" class="pointer center" onclick="submit_new_rent()"/>
+        <img src="img/submit_button.png" class="pointer center" onclick="submit_new_up_rent()"/>
     </div>
 
      <div id='rent_down_dialog'>
@@ -247,7 +247,7 @@
         <br>
         <br>
          <div class="error" style="color:RED; width:120px" ></div>
-        <img src="img/submit_button.png" class="pointer center" onclick="submit_new_rent()"/>
+        <img src="img/submit_button.png" class="pointer center" onclick="submit_new_low_rent()"/>
     </div>
 
      <div id='check_dialog'>
@@ -359,7 +359,7 @@
 
 {% block js %}
 <script type="text/javascript">
-    function submit_new_rent(id){
+    function submit_new_up_rent(id){
         var city=$('#up_city_in').val();
         var street=$('#up_street_in').val();
         var apr=$('#up_apr_in').val();
@@ -506,7 +506,7 @@
                });
         {% for r in BAD_LIST%}
 
-            addMarker( {{r.lng}} , {{r.lat}} ,'{{r.street}}','{{r.address}}', '{{r.old_price}}' ,'{{r.new_price}}',{{ r.apartment }},{{ r.num_of_rooms }});
+            addMarker( {{r.lng}} , {{r.lat}} ,'{{r.street}}','{{r.address}}', '{{r.old_price}}' ,'{{r.new_price}}','{{ r.apartment }}',{{ r.num_of_rooms }});
 
          {%endfor%}
 
