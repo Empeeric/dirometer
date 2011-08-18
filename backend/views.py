@@ -1,8 +1,10 @@
+from math import sqrt
 from django.http import HttpResponse
 from models import RentReport
 from google.appengine.api.urlfetch import Fetch
 import settings
 import logging
+from  models import MobileFullReport
 import urllib
 try:
     import json
@@ -95,6 +97,14 @@ def makeQuery(request):
         if uc:
             resp=resp+" -1"
         return HttpResponse(resp)
+
+def getNearBy(request):
+    lon=request.POST.get('lon')
+    lat=request.POST.get('lat')
+    report_list=[ (i.getSimpleObject() ) for i in list( MobileFullReport.objects.all() ) ]
+    report_list=sorted( report_list, key=lambda report: sqrt( pow(report.lon - lon , 2) + pow(report.lat - lat , 2) )  )
+    report_list=report_list[:settings.MAX_NEAR_ITEMS]
+    return HttpResponse(json.dumps(report_list))
 
 def update_mobile(request):
     logging.info("POST:"+str(request.POST))
